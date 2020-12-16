@@ -15,13 +15,19 @@ var pluckFirstLineFromFile = function (filePath, callback) {
       let firstLine = fileContents.substring(0, fileContents.indexOf('\n'));
       callback(null, firstLine);
     }
-
   });
 };
 
 // This function should retrieve the status code of a GET request to `url`
-var getStatusCode = function (url) {
+var getStatusCode = function (url, callback) {
   // TODO
+  request(url, (err, response, body) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, response.statusCode);
+    }
+  });
 };
 
 // Export these functions so we can test them and reuse them in later exercises
